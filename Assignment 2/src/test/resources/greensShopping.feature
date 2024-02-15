@@ -60,5 +60,3 @@ Feature: Greens Website Shopping Features
     And the category should show at least 5 products
     When I click on the first product in the results
     Then I should be taken to the details page for that product
-
-    Scenario: add
