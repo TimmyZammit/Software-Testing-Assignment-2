@@ -2,24 +2,30 @@ package test.asos;
 
 import asosPageObjects.asosCategoryPage;
 import asosPageObjects.asosMainPage;
+import io.cucumber.java.After;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.AfterEach;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import static org.junit.Assert.assertTrue;
 
 public class asosSteps {
     private WebDriver driver;
+
     private asosPageObjects.asosMainPage asosMainPage;
     private asosCategoryPage categoryPage;
 
     @Given("I am a user of the website")
     public void i_am_a_user_of_the_website() {
         driver = new ChromeDriver();
+        driver.manage().window().maximize();
         asosMainPage = new asosMainPage(driver);
     }
 
@@ -28,7 +34,7 @@ public class asosSteps {
         driver.get("https://www.asos.com/");
     }
 
-    @When("I click on the {string} category")
+    @And("I click on the {string} category")
     public void i_click_on_the_category(String category) {
         asosMainPage.clickCategory(category);
         categoryPage = new asosCategoryPage(driver);
@@ -51,6 +57,12 @@ public class asosSteps {
         // Assuming search results load on the same page or a new page object is created for search results.
     }
 
-    // Define other steps
+    @After
+    public void cleanup(){
+        if (driver != null) {
+            driver.quit();
+        }
+    }
+
 }
 

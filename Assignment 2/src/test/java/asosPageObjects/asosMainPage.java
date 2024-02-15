@@ -12,7 +12,7 @@ public class asosMainPage {
     }
 
     public void clickCategory(String categoryName) {
-        WebElement categoryLink = driver.findElement(By.className("/"+categoryName+"?ctaref=hp|gen|top|"+categoryName));
+        WebElement categoryLink = driver.findElement(By.xpath("//a[contains(@href, '/"+categoryName+"/')]"));
         categoryLink.click();
     }
 
